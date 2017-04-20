@@ -1,3 +1,7 @@
+
+
+
+
 import random
 import math
 
@@ -43,7 +47,7 @@ else:
 
 
 
-
+# Mix code è compostto da rFind e Boltzmann Counter, tiene un rating dei 2 algoritmi e lancia quello con score più alto
 
 rockRating *= 0.95
 scissorsRating *= 0.95
