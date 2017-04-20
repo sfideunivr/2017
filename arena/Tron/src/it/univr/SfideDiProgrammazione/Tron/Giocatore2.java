@@ -55,76 +55,54 @@ public class Giocatore2 extends Giocatore {
 	*/
 	
 	/*
-	Cerca di riempire tutta la scacchiera.
+		Cerca di riempire tutta la scacchiera.
 	*/
 	@Override
 	protected char scegliMossaDaFare(int posXavv, int posYavv, char[][] scacchiera) {
+		boolean giocatore2 = true;
 		
-		if(liberaASinistra(scacchiera))
-			return 'L';
-		else if(liberaInAlto(scacchiera))
-			return 'U';
-		else if(liberaADestra(scacchiera))
-			return 'R';
-		else
-			return 'D';
+		if(storicoMosse.size() == 0)
+			if(posY == DIM - 1)
+				giocatore2 = false;
+		
+		if(giocatore2) {
+			if(liberaAlto(scacchiera))
+				return 'U';
+			else if(liberaSinistra(scacchiera))
+				return 'L';
+			else if(liberaBasso(scacchiera))
+				return 'D';
+			else
+				return 'R';
+		}
+		
+		else {
+			if(liberaAlto(scacchiera))
+				return 'U';
+			else if(liberaDestra(scacchiera))
+				return 'R';
+			else if(liberaBasso(scacchiera))
+				return 'D';
+			else
+				return 'L';
+		}
 
 	}
 	
-	private boolean liberaASinistra(char[][] scacchiera) {
+	private boolean liberaSinistra(char[][] scacchiera) {
 		return posY != 0 && scacchiera[posX][posY - 1] == '0';
 	}
 	
-	private boolean liberaADestra(char[][] scacchiera) {
+	private boolean liberaDestra(char[][] scacchiera) {
 		return posY != DIM - 1 && scacchiera[posX][posY + 1] == '0';
 	}
 	
-	private boolean liberaInAlto(char[][] scacchiera) {
+	private boolean liberaAlto(char[][] scacchiera) {
 		return posX != 0 && scacchiera[posX - 1][posY] == '0';
 	}
 	
-	private boolean liberaInBasso(char[][] scacchiera) {
+	private boolean liberaBasso(char[][] scacchiera) {
 		return posX != DIM - 1 && scacchiera[posX + 1][posY] == '0';
-	}
-	
-	private boolean eInAltoASinistra(int posX, int posY) {
-		return (posX >= 0 && posX < DIM / 2) && (posY >= 0 && posY < DIM / 2);
-	}
-	
-	private boolean eInAltoADestra(int posX, int posY) {
-		return (posX >= 0 && posX < DIM / 2) && (posY >= DIM / 2 && posY < DIM);
-	}
-	
-	private boolean eInBassoASinistra(int posX, int posY) {
-		return (posX >= DIM / 2 && posX < DIM) && (posY >= 0 && posY < DIM / 2);
-	}
-	
-	private boolean eInBassoADestra(int posX, int posY) {
-		return (posX >= DIM / 2 && posX < DIM) && (posY >= DIM / 2 && posY < DIM);
-	}
-	
-	private boolean ePiuInAltoDellAvversario(int posXavv) {
-		return posX < posXavv;
-	}
-	
-	private boolean eInAltoQuantoLAvversario(int posXavv) {
-		return posX == posXavv;
-	}
-	
-	private boolean ePiuASinistraDellAvversario(int posYavv) {
-		return posY < posYavv;
-	}
-	
-	private boolean eASinistraQuantoLAvversario(int posYavv) {
-		return posY == posYavv;
-	}
-	
-	private int distanzaOrizzontale(int posYavv) {
-		return Math.abs(posYavv - posY);
-	}
-	
-	private int distanzaVerticale(int posXavv) {
-		return Math.abs(posXavv - posX);
 	}
 
 }
