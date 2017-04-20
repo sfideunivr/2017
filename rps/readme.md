@@ -2,15 +2,22 @@ Ciao!
 
 Rps è la sfida sasso carta forbice.
 
-Per testare il tuo bot in locale 
-scarica phyton e il file psrunner_giovanni.py
-Scarica un bot che sarà il tuo avversario 
-dopo averli aggiunto i tre file (psrunner, il tuo bot, il bot avversario) nella stessa cartella
-avvia il prompit avvia phyton e lancia il comando psrunner bot1 bot2
+Scarica il repo con il comando:
 
+>> git clone https://github.com/sfideunivr/2017.git
 
-Carica su git i test fatti anche se non sono eccellenti
+Aggiungi il tuo bot python nella cartella bots.
+Tutti i bots python all'interno della cartella saranno
+ utilizzati nell'arena.
 
-Fai il login con le credenziali del gruppo e clicca su upload files in alto a destra.
+Comandi:
+
+Lancio i bots contenuti nella cartella bots facendoli
+ sfidare una volta sola per 10^7 rounds.
+
+>> python rpsrunner.py -m 1 bots/*.py
+
+Una volta che ottieni il risultato desiderato esegui il commit
+ del bot all'interno della cartella bots, con le credenziali del master.
 
 
