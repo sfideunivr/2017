@@ -1,3 +1,5 @@
+# mix code composto da rFind e Boltzmann Counter, tiene un rating dei due algoritmi e lancia quello con score maggiore
+
 import random
 import math
 
@@ -39,10 +41,6 @@ else:
       output_one = anti[expected]
     else:
       output_one = random.choice(['R', 'P', 'S'])
-
-
-
-
 
 
 rockRating *= 0.95

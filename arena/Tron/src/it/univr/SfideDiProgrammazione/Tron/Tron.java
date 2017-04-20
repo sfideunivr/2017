@@ -47,10 +47,8 @@ public class Tron {
 			
 			
 			/**Aggiorno la posizione corrente raggiunta dal giocatore*/
-			//if(vincitore != 10 && vincitore != 20 && vincitore != 30 ) {
-				g1.aggiornaPosizioneRaggiunta(mossaGiocatore1);
-				g2.aggiornaPosizioneRaggiunta(mossaGiocatore2);
-			//}
+			g1.aggiornaPosizioneRaggiunta(mossaGiocatore1);
+			g2.aggiornaPosizioneRaggiunta(mossaGiocatore2);
 						
 			g1.setStoricoMosseAvversario(mossaGiocatore2);
 			g2.setStoricoMosseAvversario(mossaGiocatore1);
@@ -82,8 +80,6 @@ public class Tron {
 		case 'R': tempYg2++; break;
 		}		
 		
-		//if(tempXg1 == tempXg2 && tempYg1 == tempYg2)
-			//return 0;
 		if(((tempXg1 >= 0 && tempXg1 <= DIM - 1) && (tempYg1 >= 0 && tempYg1 <= DIM - 1)) && ((tempXg2 < 0 || tempXg2 > DIM - 1) || (tempYg2 < 0 || tempYg2 > DIM - 1))) {
 			scacchiera[tempXg1][tempYg1] = 'W';
 			return 1;
