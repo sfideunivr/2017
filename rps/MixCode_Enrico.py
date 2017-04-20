@@ -1,6 +1,4 @@
-
-
-
+# mix code composto da rFind e Boltzmann Counter, tiene un rating dei due algoritmi e lancia quello con score maggiore
 
 import random
 import math
@@ -44,10 +42,6 @@ else:
     else:
       output_one = random.choice(['R', 'P', 'S'])
 
-
-
-
-# Mix code è compostto da rFind e Boltzmann Counter, tiene un rating dei 2 algoritmi e lancia quello con score più alto
 
 rockRating *= 0.95
 scissorsRating *= 0.95
