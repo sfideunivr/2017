@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import jbook.util.Input;
 
 public class Tron {
-	/** La scacchiera i dimensione 9 x 9 */
+	
 	private static char [][] scacchiera = {
 			{ '0', '0', '0', '0', '0', '0', '0', '0', '0'},
 			{ '0', '0', '0', '0', '0', '0', '0', '0', '0'},
@@ -18,48 +18,45 @@ public class Tron {
 			{ '0', '0', '0', '0', '0', '0', '0', '0', '0'}
 	};
 	
-	/** Dimensione della scacchiera per controllare se la mossa scelta dal giocatore lo faccia uscire*/
 	private static final int DIM = 9;
 
 	public static void main(String[] args) {
 		
-		/** Inzializzo giocatori 1 e 2*/
-		Giocatore g1 = new Giocatore1(Input.readString("Come ti vuoi chiamare? "), 4, DIM - 1);
-		Giocatore g2 = new Giocatore2(Input.readString("Come ti vuoi chiamare? "), 4, 0);
-	
+		/** Inzializzo nome giocatore e posizione di partenza*/
+		Giocatore g1 = new Giocatore1(Input.readString("Come ti vuoi chiamare? "), 4, 0);
+		Giocatore g2 = new Giocatore2(Input.readString("Come ti vuoi chiamare? "), 4, 8);
+
 		/**
-		 * Inizializza la posizione di partenza del giocatore 1*/
+		 * inizializza la posizione di partenza del giocatore 1*/
 		scacchiera[g1.getX()][g1.getY()] = '1';
 		
 		/**
 		 * inizializza la posizione di partenza del giocatore 2*/
 		scacchiera[g2.getX()][g2.getY()] = '2';
 				
-		
 		int vincitore = -1, stato = 0;
 		stampaStatoCorrente(stato);
-		
 		while(vincitore < 0) {
 			
-			/** I giocatori, secondo un qualche algoritmo, selezionano la mossa che vorranno fare.*/
+			/**I giocatori, secondo un qualche algoritmo, selezionano la mossa che vorranno fare.*/
 			char mossaGiocatore1 = g1.scegliMossaDaFare(g2.getX(), g2.getY(), scacchiera);	
 			char mossaGiocatore2 = g2.scegliMossaDaFare(g1.getX(), g1.getY(), scacchiera);
 			
-			/** Ora la mossa scelta verrà attuata.*/
+			/**Ora la mossa scelta verra attuata.*/
 			vincitore = rendiAttualeMossaDecisa(mossaGiocatore1, mossaGiocatore2, g1.getX(), g1.getY(), g2.getX(), g2.getY());
 			
 			
-			/** Aggiorno la posizione corrente raggiunta dal giocatore.*/
+			/**Aggiorno la posizione corrente raggiunta dal giocatore*/
 			//if(vincitore != 10 && vincitore != 20 && vincitore != 30 ) {
-			g1.aggiornaPosizioneRaggiunta(mossaGiocatore1);
-			g2.aggiornaPosizioneRaggiunta(mossaGiocatore2);
-		
-			
-			/** Aggiorno la lista delle mosse fatte dai 2 giocatori.*/			
+				g1.aggiornaPosizioneRaggiunta(mossaGiocatore1);
+				g2.aggiornaPosizioneRaggiunta(mossaGiocatore2);
+			//}
+						
 			g1.setStoricoMosseAvversario(mossaGiocatore2);
 			g2.setStoricoMosseAvversario(mossaGiocatore1);
 			
 			stato++;
+					
 			stampaStatoCorrente(stato);
 	
 		}	
@@ -68,7 +65,6 @@ public class Tron {
 		stampaRisultato(vincitore, g1.getNomeGiocatore(), g2.getNomeGiocatore(), g2.getStoricoMosseAvversario(), g1.getStoricoMosseAvversario());		
 	}
 
-	/** Aggiorno la scacchiera.*/
 	private static int rendiAttualeMossaDecisa(char mossaGiocatore1, char mossaGiocatore2, int i1, int j1, int i2, int j2) {
 		int tempXg1 = i1, tempYg1 = j1 , tempXg2 = i2, tempYg2 = j2;
 		
@@ -142,14 +138,14 @@ public class Tron {
 		
 		switch(vincitore){
 		
-		case 0: System.out.println("Non abbiamo nessun vincitore. Il bot (1) *" + nomeGiocatore1 +
+		case 0: case 30: System.out.println("Non abbiamo nessun vincitore. Il bot (1) *" + nomeGiocatore1 +
 				         "* e il bot (2) *" + nomeGiocatore2 + "* fanno schifo!");
 				         break;
 				
-		case 1: System.out.println("Nell'eterna lotta tra i bot, il vincitore è il bot (1) *" + nomeGiocatore1 + "*.");
+		case 1: case 10: System.out.println("Nell'eterna lotta tra i bot, il vincitore è il bot (1) *" + nomeGiocatore1 + "*.");
 				         break;
 		
-		case 2: System.out.println("Nell'eterna lotta tra i bot, il vincitore è il bot (2) *" + nomeGiocatore2 + "*.");
+		case 2: case 20: System.out.println("Nell'eterna lotta tra i bot, il vincitore è il bot (2) *" + nomeGiocatore2 + "*.");
 						 break;
 		}
 		
