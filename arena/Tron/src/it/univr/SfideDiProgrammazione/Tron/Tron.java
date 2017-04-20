@@ -81,7 +81,9 @@ public class Tron {
 		case 'L': tempYg2--; break;
 		case 'R': tempYg2++; break;
 		}		
-			
+		
+		//if(tempXg1 == tempXg2 && tempYg1 == tempYg2)
+			//return 0;
 		if(((tempXg1 >= 0 && tempXg1 <= DIM - 1) && (tempYg1 >= 0 && tempYg1 <= DIM - 1)) && ((tempXg2 < 0 || tempXg2 > DIM - 1) || (tempYg2 < 0 || tempYg2 > DIM - 1))) {
 			scacchiera[tempXg1][tempYg1] = 'W';
 			return 1;
@@ -95,7 +97,7 @@ public class Tron {
 				if(((tempXg2 < 0 || tempXg2 > DIM - 1) || (tempYg2 < 0 || tempYg2 > DIM - 1)) && ((tempXg1 < 0 || tempXg1 > DIM - 1) || (tempYg1 < 0 || tempYg1 > DIM - 1)))
 					return 0;
 				else
-					if(miScontroConUnaScia(scacchiera[tempXg1][tempYg1]) && miScontroConUnaScia(scacchiera[tempXg2][tempYg2])) {
+					if((miScontroConUnaScia(scacchiera[tempXg1][tempYg1]) && miScontroConUnaScia(scacchiera[tempXg2][tempYg2])) || (tempXg1 == tempXg2 && tempYg1 == tempYg2)) {
 						scacchiera[tempXg1][tempYg1] = 'L';	
 						scacchiera[tempXg2][tempYg2] = 'L';
 						return 0;
