@@ -1,10 +1,10 @@
 Ciao!
 
-Rps Ë la sfida sasso carta forbice.
+Rps √® la sfida sasso carta forbice.
 
 Per testare il tuo bot in locale 
 scarica phyton e il file psrunner_giovanni.py
-Scarica un bot che sar‡ il tuo avversario 
+Scarica un bot che sar√† il tuo avversario 
 dopo averli aggiunto i tre file (psrunner, il tuo bot, il bot avversario) nella stessa cartella
 avvia il prompit avvia phyton e lancia il comando psrunner bot1 bot2
 
