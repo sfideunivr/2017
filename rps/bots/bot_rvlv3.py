@@ -44,4 +44,3 @@ else:
 output = beat[m[mScore.index(max(mScore))]]
 if max(mScore)<0.13 or random.randint(3,40)>length:
 	output=beat[random.choice("RPS")]
-print(('R'=='R')+('R'=='R'))
