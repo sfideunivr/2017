@@ -3,9 +3,9 @@ package it.univr.SfideDiProgrammazione.Tron;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class bot_enrico extends Giocatore {
+public class bot_enrico_giovanni extends Giocatore {
 
-	public bot_enrico(String nomeGiocatore, int i, int j) {
+	public bot_enrico_giovanni(String nomeGiocatore, int i, int j) {
 		super(nomeGiocatore, i, j);
 		// TODO Auto-generated constructor stub
 	}
