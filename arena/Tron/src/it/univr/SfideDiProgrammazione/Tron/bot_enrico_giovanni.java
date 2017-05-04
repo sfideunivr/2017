@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class bot_enrico_giovanni extends Giocatore {
-
+	boolean primaMossa = true;
 	public bot_enrico_giovanni(String nomeGiocatore, int i, int j) {
 		super(nomeGiocatore, i, j);
 		// TODO Auto-generated constructor stub
@@ -16,12 +16,8 @@ public class bot_enrico_giovanni extends Giocatore {
 	@Override
 	protected char scegliMossaDaFare(int posXavv, int posYavv, char[][] scacchiera) {
 		boolean giocatore1 = true;
-		boolean primaMossa = false;
+		
 	
-		if(storicoMosse.size() <= 6){
-			primaMossa = true;
-			
-		}
 		//giocatore1
 		if(giocatore1) {
 			if(liberaDestra(scacchiera))
