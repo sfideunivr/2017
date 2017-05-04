@@ -1,8 +1,8 @@
 package it.univr.SfideDiProgrammazione.Tron;
 
-public class Giocatore1 extends Giocatore {
+public class Giocatore1_Scarpari_Pasotto_v1 extends Giocatore {
 
-	public Giocatore1(String nomeGiocatore, int i, int j) {
+	public Giocatore1_Scarpari_Pasotto_v1(String nomeGiocatore, int i, int j) {
 		super(nomeGiocatore, i, j);
 		// TODO Auto-generated constructor stub
 	}
