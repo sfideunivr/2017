@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class bot_enrico_giovanni extends Giocatore {
 	boolean primaMossa = true;
+	boolean giocatore1 = true;
 	public bot_enrico_giovanni(String nomeGiocatore, int i, int j) {
 		super(nomeGiocatore, i, j);
 		// TODO Auto-generated constructor stub
@@ -15,8 +16,11 @@ public class bot_enrico_giovanni extends Giocatore {
 	*/
 	@Override
 	protected char scegliMossaDaFare(int posXavv, int posYavv, char[][] scacchiera) {
-		boolean giocatore1 = true;
 		
+		
+		if(storicoMosse.size() == 0)
+			if(posY == DIM - 1)
+				giocatore1 = false;
 	
 		//giocatore1
 		if(giocatore1) {
