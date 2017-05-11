@@ -1,3 +1,0 @@
-Pool 1: 10 bots loaded
-Playing 1 matches per pairing.
-Running matches in 4 threads
