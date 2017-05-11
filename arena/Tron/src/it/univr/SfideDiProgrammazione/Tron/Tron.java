@@ -2,8 +2,6 @@ package it.univr.SfideDiProgrammazione.Tron;
 
 import java.util.ArrayList;
 
-import jbook.util.Input;
-
 public class Tron {
 	
 	private static char [][] scacchiera = {
@@ -23,8 +21,8 @@ public class Tron {
 	public static void main(String[] args) {
 		
 		/** Inzializzo nome giocatore e posizione di partenza*/
-		Giocatore g1 = new Giocatore1(Input.readString("Come ti vuoi chiamare? "), 4, 0);
-		Giocatore g2 = new Giocatore2(Input.readString("Come ti vuoi chiamare? "), 4, 8);
+		Giocatore g1 = new Giocatore1("Giocatore 1", 4, 0);
+		Giocatore g2 = new Giocatore2("Giocatore 2", 4, 8);
 
 		/**
 		 * inizializza la posizione di partenza del giocatore 1*/
