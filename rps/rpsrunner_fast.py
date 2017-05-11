@@ -239,7 +239,7 @@ This is REQUIRED if multiprocessing features are in use."""
 
 class Contest:
     """Contest object handles running a contest between two sets of bots."""
-    def __init__(self, bot1, bot2, rounds=500000):
+    def __init__(self, bot1, bot2, rounds=1000):
         self.bot1 = bot1
         self.bot2 = bot2
         self.rounds = rounds
@@ -336,7 +336,7 @@ desc is an optional output string."""
     return bots
 
 
-def match_maker(bots, bots2=None, matches=1, rounds=500000):
+def match_maker(bots, bots2=None, matches=1, rounds=1000):
     """generates matches between all the bots in bots or in the union of
 bots and bots2.  matches specifies the number of matches played for each
 pairing.  a bot will never play itself."""

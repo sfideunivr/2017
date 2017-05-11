@@ -1,0 +1,38 @@
+Pool 1: 8 bots loaded
+Playing 1 matches per pairing.
+Running matches in 4 threads
+28 matches run
+total run time: 30638.40 seconds
+
+bots/bot_rvlv3.py: won 71.4% of matches (5 of 7)
+    won 43.0% of rounds (301301 of 700000)
+    avg score 14648.1, net score 102537.0
+
+bots/bot_random.py: won 57.1% of matches (4 of 7)
+    won 33.3% of rounds (233260 of 700000)
+    avg score 43.1, net score 302.0
+
+bots/bot_1.py: won 57.1% of matches (4 of 7)
+    won 33.4% of rounds (233765 of 700000)
+    avg score 53.6, net score 375.0
+
+bots/bot_stupid.py: won 57.1% of matches (4 of 7)
+    won 24.0% of rounds (167805 of 700000)
+    avg score -28042.6, net score -196298.0
+
+bots/bot_mixcode_enrico.py: won 42.9% of matches (3 of 7)
+    won 33.0% of rounds (230974 of 700000)
+    avg score -485.1, net score -3396.0
+
+bots/bot_bayes13.py: won 42.9% of matches (3 of 7)
+    won 42.7% of rounds (298986 of 700000)
+    avg score 13939.7, net score 97578.0
+
+bots/bot_timefreq.py: won 42.9% of matches (3 of 7)
+    won 33.3% of rounds (233124 of 700000)
+    avg score -25.9, net score -181.0
+
+bots/bot_samu_fede_fu.py: won 28.6% of matches (2 of 7)
+    won 33.3% of rounds (232758 of 700000)
+    avg score -131.0, net score -917.0
+
