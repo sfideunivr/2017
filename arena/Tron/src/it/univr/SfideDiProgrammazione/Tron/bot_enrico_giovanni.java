@@ -36,14 +36,14 @@ public class bot_enrico_giovanni extends Giocatore {
 			}
 			//teste dei giocatori una sopra e una sotto(riempimento normale)
 			if(primaMossa == false && ((posX< 4 && posXavv>4)||(posX>4 && posXavv<4))){			
-				return riempiScacchiera(scacchiera);
+				return riempiScacchieraGiocatoreUno(scacchiera);
 			}
 			if(primaMossa == false && ((posX >4 && posXavv >4)||(posX <4 && posXavv <4))){
 				if(posX >4 && posXavv >4){
 					if(liberaBasso(scacchiera)){
 						return 'D';
 					}else {
-						return riempiScacchiera(scacchiera);
+						return riempiScacchieraGiocatoreUno(scacchiera);
 					}
 					
 				}
@@ -52,7 +52,7 @@ public class bot_enrico_giovanni extends Giocatore {
 					if(liberaAlto(scacchiera)){
 						return 'U';
 					}else {
-						return riempiScacchiera(scacchiera);
+						return riempiScacchieraGiocatoreUno(scacchiera);
 						
 					}
 					
@@ -64,12 +64,42 @@ public class bot_enrico_giovanni extends Giocatore {
 		else {
 			if(liberaSinistra(scacchiera))
 				return 'L';
-			else if(liberaAlto(scacchiera))
-				return 'U';
-			else if(liberaDestra(scacchiera))
-				return 'R';
-			else
-				return 'D';
+
+			else if(!liberaSinistra(scacchiera) && primaMossa){
+				if(caselleLibereSopra(scacchiera)>caselleLibereSotto(scacchiera)){
+					primaMossa = false;
+					return 'U';
+
+				}
+				if(caselleLibereSopra(scacchiera)<=caselleLibereSotto(scacchiera)){
+					primaMossa = false;
+					return 'D';
+				}
+			}
+			//teste dei giocatori una sopra e una sotto(riempimento normale)
+			if(primaMossa == false && ((posX< 4 && posXavv>4)||(posX>4 && posXavv<4))){			
+				return riempiScacchieraGiocatoreDue(scacchiera);
+			}
+			if(primaMossa == false && ((posX >4 && posXavv >4)||(posX <4 && posXavv <4))){
+				if(posX >4 && posXavv >4){
+					if(liberaBasso(scacchiera)){
+						return 'D';
+					}else {
+						return riempiScacchieraGiocatoreDue(scacchiera);
+					}
+					
+				}
+
+				if(posX <4 && posXavv <4){
+					if(liberaAlto(scacchiera)){
+						return 'U';
+					}else {
+						return riempiScacchieraGiocatoreDue(scacchiera);
+						
+					}
+					
+				}
+			}
 		}
 		return 'c';
 	}
@@ -91,7 +121,7 @@ public class bot_enrico_giovanni extends Giocatore {
 	}
 
 
-	private char riempiScacchiera(char[][] scacchiera){
+	private char riempiScacchieraGiocatoreUno(char[][] scacchiera){
 		if(liberaDestra(scacchiera))
 				return 'R';
 			else if(liberaBasso(scacchiera))
@@ -102,7 +132,17 @@ public class bot_enrico_giovanni extends Giocatore {
 				return 'U';
 
 	}
+	private char riempiScacchieraGiocatoreDue(char[][] scacchiera){
+		if(liberaSinistra(scacchiera))
+				return 'L';
+			else if(liberaBasso(scacchiera))
+				return 'D';
+			else if(liberaDestra(scacchiera))
+				return 'R';
+			else
+				return 'U';
 
+	}
 
 	private int caselleLibereSopra(char[][] scacchiera){
 		int caselleLibere = 0;
