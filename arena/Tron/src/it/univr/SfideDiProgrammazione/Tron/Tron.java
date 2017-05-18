@@ -1,8 +1,25 @@
 package it.univr.SfideDiProgrammazione.Tron;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
+import java.util.stream.Stream;
+
+import jbook.util.Input;
 
 public class Tron {
+	
+	private static ArrayList<String> nomiGiocatori = new ArrayList<String>();
+
+	private static ArrayList<Giocatore> giocatori = new ArrayList<Giocatore>();
 	
 	private static char [][] scacchiera = {
 			{ '0', '0', '0', '0', '0', '0', '0', '0', '0'},
@@ -17,13 +34,82 @@ public class Tron {
 	};
 	
 	private static final int DIM = 9;
+	
+	private static boolean verbose = false;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {
 		
-		/** Inzializzo nome giocatore e posizione di partenza*/
-		Giocatore g1 = new Giocatore1("Giocatore 1", 4, 0);
-		Giocatore g2 = new Giocatore2("Giocatore 2", 4, 8);
+		String directoryBots = new File("src/it/univr/SfideDiProgrammazione/Tron/Bots").getAbsolutePath();
+		File name = new File(directoryBots);
+		String[] files = name.list();
+		
+		System.out.println("Bots trovati:");
+		for (String s : files) {
+			String nome = s.substring(0, s.indexOf("."));
+			System.out.println(nome);
+			nomiGiocatori.add(nome);
+			Class classe = Class.forName("it.univr.SfideDiProgrammazione.Tron.Bots." + nome);
+			Constructor costruttore = classe.getConstructor(String.class, int.class, int.class);
+			Giocatore giocatore = (Giocatore) costruttore.newInstance(nome, 0, 0);
+			giocatori.add(giocatore);
+		}
+		System.out.println();
+		
+		int arena = scegliArena();
+		char sceltaStampa;
+		int x1, y1, x2, y2;
 
+		switch(arena) {
+		case 1: x1 = 4; y1= 0; x2 = 4; y2 = 8; break;
+		case 2: x1 = new Random().nextInt(DIM); y1= 0; x2 = new Random().nextInt(DIM); y2 = 8; break;
+		case 3: 
+			do {
+				x1 = new Random().nextInt(DIM);
+				y1 = new Random().nextInt(DIM);
+				x2 = new Random().nextInt(DIM);
+				y2 = new Random().nextInt(DIM);
+			}
+			while(x1 == x2 && y1 == y2); break;
+		default: x1 = 0; y1 = 0; x2 = 0; y2 = 0; break;
+		}
+		
+		do {
+			sceltaStampa = Input.readChar("\nAttivare la stampa della scacchiera? (Y/N) ");
+		} while(sceltaStampa != 'Y' && sceltaStampa != 'y' && sceltaStampa != 'N' && sceltaStampa != 'n');
+		
+		if(sceltaStampa == 'Y' || sceltaStampa == 'y')
+			verbose = true;
+
+		int numeroGiocatori = giocatori.size();
+		
+		Giocatore g1 = null;
+		Giocatore g2 = null;
+		int numeroScontro = 1;
+		for(int i = 0; i < numeroGiocatori; i++) {
+			for(int j = 0; j < numeroGiocatori; j++) {
+				g1 = giocatori.get(i);
+				g2 = giocatori.get(j);
+				if(!g1.getNome().equals(g2.getNome())) {
+					g1.setX(x1);
+					g1.setY(y1);
+					g2.setX(x2);
+					g2.setY(y2);
+					System.out.println("Scontro #" + numeroScontro + "\n");
+					numeroScontro++;
+					scontra(g1, g2);
+				}
+			}
+		}
+		
+		stampaClassifica();
+		
+	}
+	
+	private static void scontra(Giocatore g1, Giocatore g2) {
+		
+		System.out.println("Giocatore 1 = " + g1.getNome() + " in posizione (" + g1.getX() + ", " + g1.getY() + ")");
+		System.out.println("Giocatore 2 = " + g2.getNome() + " in posizione (" + g2.getX() + ", " + g2.getY() + ")\n");
+		
 		/**
 		 * inizializza la posizione di partenza del giocatore 1*/
 		scacchiera[g1.getX()][g1.getY()] = '1';
@@ -52,13 +138,35 @@ public class Tron {
 			g2.setStoricoMosseAvversario(mossaGiocatore1);
 			
 			stato++;
-					
-			stampaStatoCorrente(stato);
+			
+			if(verbose)
+				stampaStatoCorrente(stato);
 	
 		}	
 		
 		/** Stampa risultato*/
-		stampaRisultato(vincitore, g1.getNomeGiocatore(), g2.getNomeGiocatore(), g2.getStoricoMosseAvversario(), g1.getStoricoMosseAvversario());		
+		stampaRisultato(vincitore, g1, g2);		
+		
+		resetScacchiera();
+		
+		System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+		
+	}
+	
+	private static int scegliArena() {
+		int scelta;
+
+		System.out.println("Scegli il tipo di arena");
+		do {
+			System.out.println(
+				"(1) Partenza centrale, stessa riga, lati opposti\n" +
+				"(2) Partenza riga casuale, lati opposti\n" +
+				"(3) Partenza puramente casuale\n"
+			);
+			scelta = Input.readInt();
+		} while(scelta < 1 || scelta > 3);
+
+		return scelta;
 	}
 
 	private static int rendiAttualeMossaDecisa(char mossaGiocatore1, char mossaGiocatore2, int i1, int j1, int i2, int j2) {
@@ -130,27 +238,38 @@ public class Tron {
 	}
 
 
-	private static void stampaRisultato(int vincitore, String nomeGiocatore1, String nomeGiocatore2, ArrayList<Character> storicoMosseGiocatore1, ArrayList<Character> storicoMosseGiocatore2) {
+	private static void stampaRisultato(int vincitore, Giocatore g1, Giocatore g2) {
 		
-		switch(vincitore){
+		switch(vincitore) {
 		
-		case 0: case 30: System.out.println("Non abbiamo nessun vincitore. Il bot (1) *" + nomeGiocatore1 +
-				         "* e il bot (2) *" + nomeGiocatore2 + "* fanno schifo!");
+		case 0:
+			g1.assegnaPunteggio(1);
+			g2.assegnaPunteggio(1);
+			System.out.println("Non abbiamo nessun vincitore. Il bot (1) *" + g1.getNome() +
+				         "* e il bot (2) *" + g2.getNome() + "* fanno schifo!");
 				         break;
 				
-		case 1: case 10: System.out.println("Nell'eterna lotta tra i bot, il vincitore è il bot (1) *" + nomeGiocatore1 + "*.");
+		case 1:
+			g1.assegnaPunteggio(3);
+			System.out.println("Nell'eterna lotta tra i bot, il vincitore è il bot (1) *" + g1.getNome() + "*.");
 				         break;
 		
-		case 2: case 20: System.out.println("Nell'eterna lotta tra i bot, il vincitore è il bot (2) *" + nomeGiocatore2 + "*.");
+		case 2:
+			g2.assegnaPunteggio(3);
+			System.out.println("Nell'eterna lotta tra i bot, il vincitore è il bot (2) *" + g2.getNome() + "*.");
 						 break;
 		}
 		
-		System.out.println("MOSSE GIOCATORE (1) *" + nomeGiocatore1 + "*: "  + storicoMosseGiocatore1);
-		System.out.println("MOSSE GIOCATORE (2) *" + nomeGiocatore2 + "*: "  + storicoMosseGiocatore2);
+		System.out.println("MOSSE GIOCATORE (1) *" + g1.getNome() + "*: "  + g1.getStoricoMosse());
+		System.out.println("MOSSE GIOCATORE (2) *" + g2.getNome() + "*: "  + g2.getStoricoMosse());
 	}
 
 	private static void stampaStatoCorrente(int stato) {
-		System.out.println(stato + "\n");
+		if(stato == 0)
+			System.out.println("Situazione iniziale\n");
+		else
+			System.out.println("Mossa #" + stato + "\n");
+		
 		for(int i = 0; i < DIM; i++) {
 			for(int j = 0; j < DIM; j++) {
 				System.out.print(scacchiera[i][j] + " ");
@@ -158,6 +277,28 @@ public class Tron {
 			System.out.println();
 		}		
 		System.out.println();
+	}
+	
+	private static void resetScacchiera() {
+		for(int i = 0; i < DIM; i++)
+			for(int j = 0; j < DIM; j++)
+				scacchiera[i][j] = '0';
+	}
+	
+	private static void stampaClassifica() {
+		
+		System.out.println("Classifica finale\n");
+	
+		Collections.sort(giocatori, new Comparator<Giocatore>() {
+		    @Override
+		    public int compare(Giocatore o1, Giocatore o2) {
+		        return ((Integer) o1.getPunteggio()).compareTo((Integer) o2.getPunteggio());
+		    }
+		});
+		
+		for(int i = giocatori.size() - 1; i >= 0; i--)
+			System.out.println("#" + (giocatori.size() - i) + " " + giocatori.get(i).getNome() + ": " + giocatori.get(i).getPunteggio());
+	
 	}
 
 }
