@@ -2,37 +2,37 @@ Pool 1: 8 bots loaded
 Playing 1 matches per pairing.
 Running matches in 4 threads
 28 matches run
-total run time: 37645.89 seconds
+total run time: 35944.17 seconds
 
-bots/bot_random.py: won 71.4% of matches (5 of 7)
-    won 33.4% of rounds (257447 of 770000)
-    avg score 145.0, net score 1015.0
+bots/bot_samu_fede_fu.py: won 71.4% of matches (5 of 7)
+    won 33.4% of rounds (256827 of 770000)
+    avg score 73.9, net score 517.0
 
-bots/bot_mixcode_enrico.py: won 57.1% of matches (4 of 7)
-    won 33.1% of rounds (254632 of 770000)
-    avg score -432.1, net score -3025.0
+bots/bot_rvlv3.py: won 71.4% of matches (5 of 7)
+    won 43.0% of rounds (330954 of 770000)
+    avg score 16028.9, net score 112202.0
 
 bots/bot_bayes13.py: won 57.1% of matches (4 of 7)
-    won 42.8% of rounds (329430 of 770000)
-    avg score 15400.7, net score 107805.0
+    won 42.8% of rounds (329462 of 770000)
+    avg score 15376.1, net score 107633.0
 
-bots/bot_rvlv3.py: won 57.1% of matches (4 of 7)
-    won 43.1% of rounds (331492 of 770000)
-    avg score 16060.6, net score 112424.0
-
-bots/bot_stupid.py: won 57.1% of matches (4 of 7)
-    won 24.0% of rounds (184840 of 770000)
-    avg score -30843.1, net score -215902.0
-
-bots/bot_1.py: won 42.9% of matches (3 of 7)
+bots/bot_1.py: won 57.1% of matches (4 of 7)
     won 33.3% of rounds (256512 of 770000)
-    avg score -59.7, net score -418.0
+    avg score -45.7, net score -320.0
 
-bots/bot_samu_fede_fu.py: won 28.6% of matches (2 of 7)
-    won 33.3% of rounds (256130 of 770000)
-    avg score -146.6, net score -1026.0
+bots/eumad.py: won 42.9% of matches (3 of 7)
+    won 24.0% of rounds (184988 of 770000)
+    avg score -31095.3, net score -217667.0
 
-bots/bot_timefreq.py: won 28.6% of matches (2 of 7)
-    won 33.3% of rounds (256200 of 770000)
-    avg score -124.7, net score -873.0
+bots/bot_random.py: won 42.9% of matches (3 of 7)
+    won 33.4% of rounds (256829 of 770000)
+    avg score 44.9, net score 314.0
+
+bots/bot_timefreq.py: won 42.9% of matches (3 of 7)
+    won 33.3% of rounds (256453 of 770000)
+    avg score -13.7, net score -96.0
+
+bots/bot_mixcode_enrico.py: won 14.3% of matches (1 of 7)
+    won 33.3% of rounds (256390 of 770000)
+    avg score -369.0, net score -2583.0
 
