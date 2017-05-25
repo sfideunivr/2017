@@ -50,7 +50,18 @@ public class Tron {
 
 	/**
 	 * <p>
-	 * 
+	 * Trova i bots nel package Bots e aggiunge le classi alla lista dei giocatori.<br>
+	 * Sceglie il tipo di arena, in base alle posizioni iniziali che si desiderano per i giocatori.<br>
+	 * Determina le posizioni iniziali dei giocatori, che saranno uguali in ogni scontro tra giocatori diversi.<br>
+	 * Chiede se si desidera stampare la scacchiera di gioco dopo ogni mossa dei giocatori.<br>
+	 * Fa scontrare tutti i giocatori tra loro.
+	 * Ogni giocatore, in scontri diversi, è<br>
+	 * sia Giocatore 1 (il quale parte dalla prima colonna a sinistra della scacchiera, ad eccezione della partenza totalmente casuale)<br>
+	 * sia Giocatore 2 (il quale parte dall'ultima colonna a destra della scacchiera, ad eccezione della partenza totalmente casuale).<br>
+	 * Nessun giocatore si scontra con se stesso.<br>
+	 * Stampa la classifica alla fine di tutti gli scontri,<br>
+	 * indicando il punteggio totale ottenuto da ciascun giocatore nelle diverse partite.<br>
+	 * Stampa alcune statistiche di vittoria, pareggio e sconfitta per ogni giocatore.
 	 * </p>
 	 * 
 	 * @param args
@@ -96,6 +107,8 @@ public class Tron {
 				
 				if(!g1.getNome().equals(g2.getNome())) {
 					
+					System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+					
 					System.out.println("Scontro #" + numeroScontro + "\n");
 					
 					g1.setX(x1);
@@ -109,7 +122,13 @@ public class Tron {
 					
 					numeroScontro++;
 
+					if(verbose) {
+						Input.readString("\nPremi INVIO per continuare.");
+					}
+					
 				}
+				
+				
 			}
 		}
 		
@@ -252,8 +271,25 @@ public class Tron {
 		
 		if(scelta == 'Y' || scelta == 'y')
 			verbose = true;
+
 	}
 	
+	/**
+	 * <p>
+	 * Posiziona i due giocatori sulla scacchiera.<br>
+	 * Stampa lo stato corrente del gioco.<br>
+	 * Finché non c'è un vincitore, ogni giocatore calcola la mossa da effettuare.<br>
+	 * Attua la mossa scelta dai giocatori.<br>
+	 * Aggiorna la posizione raggiunta dai giocatori.<br>
+	 * Aggiorna per ciascun giocatore la lista delle mosse degli avversari.<br>
+	 * Incrementa il numero dello stato.
+	 * Se si è scelto l'opzione verbose, stampa la scacchiera relativa allo stato corrente.<br>
+	 * Stampa il risultato della partita, indicando attribuendo vittoria, pareggio e sconfitta.
+	 * </p>
+	 * 
+	 * @param g1 Il giocatore 1.
+	 * @param g2 Il giocatore 2.
+	 */
 	private static void scontra(Giocatore g1, Giocatore g2) {
 		
 		System.out.println("Giocatore 1 = " + g1.getNome() + " in posizione (" + g1.getX() + ", " + g1.getY() + ")");
@@ -297,13 +333,12 @@ public class Tron {
 		// Stampa il risultato della partita, indicando attribuendo vittoria, pareggio e sconfitta.
 		stampaRisultato(vincitore, g1, g2);
 		
-		System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-		
 	}
 
 	/**
 	 * <p>
-	 * 
+	 * Applica la mossa scelta da ciascun giocatore<br>
+	 * e controlla se con essa si raggiunge uno stato finale del gioco.
 	 * </p>
 	 * 
 	 * @param mossaGiocatore1 La mossa scelta dal giocatore 1.
@@ -519,6 +554,9 @@ public class Tron {
 	 * </p>
 	 */
 	private static void stampaClassifica() {
+		
+		System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+		
 		System.out.println("Classifica finale\n");
 	
 		Collections.sort(giocatori, new Comparator<Giocatore>() {
