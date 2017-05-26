@@ -195,9 +195,9 @@ public class Tron {
 		System.out.println("Scegliere il tipo di arena: ");
 		do {
 			System.out.println(
-				"(1) Partenza centrale, stessa riga, lati opposti\n" +
-				"(2) Partenza riga casuale, lati opposti\n" +
-				"(3) Partenza puramente casuale\n"
+				"(1) Partenza sulla riga centrale sulle colonne opposte della scacchiera\n" +
+				"(2) Partenza su una riga casuale sulle colonne opposte della scacchiera\n" +
+				"(3) Partenza in celle puramente casuali della scacchiera\n"
 			);
 			scelta = Input.readInt();
 		} while(scelta < 1 || scelta > 3);
