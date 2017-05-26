@@ -14,8 +14,8 @@ public class GiocatoreRiempitivo_v1 extends Giocatore {
 	 * <p>
 	 * Cerca di riempire tutta la scacchiera, prediligendo le mosse nell'ordine
 	 * <ul>
-	 * <li>U, R, D, L se Giocatore 1;</li>
-	 * <li>U, L, D, R se Giocatore 2.</li>
+	 * <li>D, L, U, R se Giocatore 1;</li>
+	 * <li>U, R, D, L se Giocatore 2.</li>
 	 * </p>
 	 * */
 	@Override
