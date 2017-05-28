@@ -83,7 +83,7 @@ else:
                 outHSM = "S"
 
 
-# AI - Probabilita' condizionata
+# Behavioural Learning
 if (output_2 == ""):
     outProb = random.choice(['R', 'P', 'S'])
     rewards[8] = scoreProb
