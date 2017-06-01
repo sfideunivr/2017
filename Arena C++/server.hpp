@@ -5,16 +5,16 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 
-#define DIM 8
+#define DIM 9
 #define QUEUE_KEY 667
-#define FROM_B1_TO_REF 1
-#define FROM_B2_TO_REF 2
-#define FROM_REF_TO_B1 3
-#define FROM_REF_TO_B2 4
-#define ID1 1
-#define ID2 2
+#define FROM_B1_TO_REF "1"
+#define FROM_B2_TO_REF "2"
+#define FROM_REF_TO_B1 "3"
+#define FROM_REF_TO_B2 "4"
+#define ID1 "1"
+#define ID2 "2"
 
-enum dir_t {up, down, left, right};
+enum dir_t {up, down, left, right, init};
 
 typedef struct
 {
