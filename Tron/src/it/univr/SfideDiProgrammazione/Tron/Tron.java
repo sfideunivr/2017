@@ -229,8 +229,8 @@ public class Tron {
 	private static void scegliPosizioniIniziali(int scelta) {
 		switch(scelta) {
 			case 1:
-				x1 = (DIM / 2) + 1; y1= 0;
-				x2 = (DIM / 2) + 1; y2 = DIM - 1;
+				x1 = (DIM / 2); y1= 0;
+				x2 = (DIM / 2); y2 = DIM - 1;
 				break;
 			case 2:
 				x1 = new Random().nextInt(DIM); y1= 0;
