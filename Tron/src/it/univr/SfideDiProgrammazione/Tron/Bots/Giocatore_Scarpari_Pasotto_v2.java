@@ -1,3 +1,7 @@
+/**
+ * Algoritmo Minimax tratto da https://gist.github.com/Hydrotoast/4453009
+ */
+
 package it.univr.SfideDiProgrammazione.Tron.Bots;
 
 import java.util.ArrayList;
@@ -23,10 +27,6 @@ public class Giocatore_Scarpari_Pasotto_v2 extends Giocatore {
 	 */
 	public Giocatore_Scarpari_Pasotto_v2(String nome, int i, int j) {
 		super(nome, i, j);
-		if(j == 0)
-			piece = PieceType.X;
-		else
-			piece = PieceType.O;
 	}
 
 	/**
@@ -36,7 +36,11 @@ public class Giocatore_Scarpari_Pasotto_v2 extends Giocatore {
 	 * </p>
 	 */
 	@Override
-	protected char calcolaMossa(int posXavv, int posYavv, char[][] scacchiera) {		
+	protected char calcolaMossa(int posXavv, int posYavv, char[][] scacchiera) {
+		if(scacchiera[posX][posY] == '1')
+			piece = PieceType.X;
+		else
+			piece = PieceType.O;
 		return minimax(new State(scacchiera, posX, posY, posXavv, posYavv));
 	}
 	
@@ -68,7 +72,7 @@ public class Giocatore_Scarpari_Pasotto_v2 extends Giocatore {
 	
 	/**
 	 * <p>
-	 * Ritorna il lowest score ricevuto dal min player.
+	 * Ritorna il punteggio più basso ricevuto dal giocatore minimizzante.
 	 * </p>
 	 * 
 	 * @param state Lo stato corrente del gioco.
@@ -95,7 +99,7 @@ public class Giocatore_Scarpari_Pasotto_v2 extends Giocatore {
 	
 	/**
 	 * <p>
-	 * Ritorna highest score ricevuto dal max player.
+	 * Ritorna il punteggio più alto ricevuto dal giocatore massimizzante.
 	 * </p>
 	 * 
 	 * @param state Lo stato corrente del gioco.
@@ -129,11 +133,13 @@ public class Giocatore_Scarpari_Pasotto_v2 extends Giocatore {
 	 * @return 1 se il giocatore corrente vince; -1 altrimenti.
 	 */
 	private int eval(State state) {
+		
 		PieceType piece = state.winner();
 		if(piece == this.piece)
 			return 1;
 		else
 			return -1;
+
 	}
 	
 	/**
@@ -231,20 +237,22 @@ public class Giocatore_Scarpari_Pasotto_v2 extends Giocatore {
 		}
 		
 		public void playMove(char move) {
+			char symbol = (piece == PieceType.X)? '1' : '2';
 			switch(move) {
-				case 'L': board[x][y - 1] = '1'; break;
-				case 'R': board[x][y + 1] = '1'; break;
-				case 'U': board[x - 1][y] = '1';break;
-				case 'D': board[x + 1][y] = '1'; break;
+				case 'L': board[x][y - 1] = symbol; break;
+				case 'R': board[x][y + 1] = symbol; break;
+				case 'U': board[x - 1][y] = symbol; break;
+				case 'D': board[x + 1][y] = symbol; break;
 			}
 		}
 		
 		public void playAdvMove(char move) {
+			char symbol = (piece == PieceType.X)? '1' : '2';
 			switch(move) {
-				case 'L': board[xa][ya - 1] = '1'; break;
-				case 'R': board[xa][ya + 1] = '1'; break;
-				case 'U': board[xa - 1][ya] = '1';break;
-				case 'D': board[xa + 1][ya] = '1'; break;
+				case 'L': board[xa][ya - 1] = symbol; break;
+				case 'R': board[xa][ya + 1] = symbol; break;
+				case 'U': board[xa - 1][ya] = symbol; break;
+				case 'D': board[xa + 1][ya] = symbol; break;
 			}
 		}
 

@@ -22,7 +22,7 @@ public class GiocatoreRiempitivo_v1 extends Giocatore {
 	protected char calcolaMossa(int posXavv, int posYavv, char[][] scacchiera) {
 		
 		if(mosse.size() == 0)
-			if(posY == DIM - 1)
+			if(scacchiera[posX][posY] == '2')
 				giocatore1 = false;
 		
 		if(giocatore1) {
